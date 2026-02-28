@@ -16,12 +16,17 @@
 
 ## What is GrantAi?
 
-GrantAi gives your AI tools persistent memory that runs 100% locally on your machine.
+GrantAi is the **shared memory layer** for AI agents.
 
-- **12ms Recall** — Sub-second context retrieval across all sessions
+Coordination frameworks are everywhere — CrewAI, AutoGen, LangGraph. But agents still lose everything when a session ends. Context windows reset. Knowledge evaporates. Each agent starts from zero.
+
+GrantAi solves this:
+
+- **Persistent Memory** — Knowledge survives sessions, accumulates over time
+- **Shared Across Agents** — Multiple AI tools read and write to the same brain
+- **12ms Recall** — Sub-second retrieval regardless of memory size
 - **100% Local** — Your data never leaves your machine
 - **AES-256 Encrypted** — Secure at rest, zero data egress
-- **Multi-Client** — Claude Code, Cursor, VS Code, and any MCP client share one brain
 
 ## Quick Start
 
@@ -80,6 +85,73 @@ GrantAi provides these tools to your AI:
 | `grantai_project` | Track project state |
 | `grantai_snippet` | Store code patterns |
 | `grantai_git` | Import git commit history |
+| `grantai_capture` | Save conversation turns for continuity |
+
+## Multi-Agent Memory Sharing
+
+Multiple agents can share knowledge through GrantAi's memory layer.
+
+### Writing memories with agent attribution
+
+```python
+# Agent 1: Researcher stores findings
+grantai_teach(
+    content="API rate limit is 100 requests/minute. Auth uses Bearer tokens.",
+    source="api-research",
+    speaker="researcher"
+)
+
+# Agent 2: Coder stores implementation notes
+grantai_teach(
+    content="Implemented retry logic with exponential backoff in api_client.py",
+    source="implementation",
+    speaker="coder"
+)
+```
+
+### Querying memories from specific agents
+
+```python
+# Get only what the researcher found
+grantai_infer(
+    input="API authentication",
+    from_agents=["researcher"]
+)
+
+# Get everything from all agents
+grantai_infer(
+    input="API rate limiting"
+)
+```
+
+### Use cases
+
+| Scenario | How it works |
+|----------|--------------|
+| **Research → Code** | Research agent stores findings, coding agent retrieves them |
+| **Multi-tool workflow** | Cursor for coding, Claude Code for commits — same memory |
+| **Session continuity** | Agent picks up where another left off |
+| **Team knowledge base** | All agents contribute to shared project context |
+
+### Framework integration
+
+GrantAi works with any MCP-compatible client. Point your agents at the same GrantAi instance:
+
+```json
+{
+  "mcpServers": {
+    "grantai": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "--pull", "always",
+               "-v", "grantai-data:/data",
+               "-e", "GRANTAI_LICENSE_KEY=YOUR_KEY",
+               "ghcr.io/solonai-com/grantai-memory:1.8.5"]
+    }
+  }
+}
+```
+
+All agents using this config share the same memory volume (`grantai-data`).
 
 ## Pricing
 
