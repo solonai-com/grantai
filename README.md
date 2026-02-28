@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://solonai.com/grantai-logo.svg" alt="GrantAi" width="80" height="80">
-</p>
-
 <h1 align="center">GrantAi</h1>
 
 <p align="center">
