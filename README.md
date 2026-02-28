@@ -91,47 +91,48 @@ GrantAi provides these tools to your AI:
 
 Multiple agents can share knowledge through GrantAi's memory layer.
 
-### Writing memories with agent attribution
+### Basic shared memory (no setup required)
 
 ```python
-# Agent 1: Researcher stores findings
+# Any agent stores
 grantai_teach(
-    content="API rate limit is 100 requests/minute. Auth uses Bearer tokens.",
-    source="api-research",
-    speaker="researcher"
+    content="API rate limit is 100 requests/minute.",
+    source="api-notes"
 )
 
-# Agent 2: Coder stores implementation notes
-grantai_teach(
-    content="Implemented retry logic with exponential backoff in api_client.py",
-    source="implementation",
-    speaker="coder"
-)
+# Any agent retrieves
+grantai_infer(input="API rate limiting")
 ```
 
-### Querying memories from specific agents
+All agents read from and write to the same memory pool. No configuration needed.
+
+### With agent attribution (optional)
+
+Use `speaker` to track which agent stored what, and `from_agents` to filter retrieval:
 
 ```python
-# Get only what the researcher found
+# Store with identity
+grantai_teach(
+    content="API uses Bearer token auth.",
+    source="api-research",
+    speaker="researcher"  # optional
+)
+
+# Retrieve from specific agent
 grantai_infer(
     input="API authentication",
-    from_agents=["researcher"]
-)
-
-# Get everything from all agents
-grantai_infer(
-    input="API rate limiting"
+    from_agents=["researcher"]  # optional filter
 )
 ```
 
-### Use cases
+### When to use `speaker`
 
-| Scenario | How it works |
-|----------|--------------|
-| **Research → Code** | Research agent stores findings, coding agent retrieves them |
-| **Multi-tool workflow** | Cursor for coding, Claude Code for commits — same memory |
-| **Session continuity** | Agent picks up where another left off |
-| **Team knowledge base** | All agents contribute to shared project context |
+| Scenario | Use speaker? | Why |
+|----------|--------------|-----|
+| **Shared knowledge base** | No | All contributions equal, no filtering needed |
+| **Session continuity** | No | Same context, just persist and retrieve |
+| **Research → Code handoff** | Yes | Coder filters for researcher's findings only |
+| **Role-based trust** | Yes | Security agent's input treated differently |
 
 ### Framework integration
 
