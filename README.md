@@ -156,7 +156,7 @@ All agents using this config share the same memory volume (`grantai-data`).
 
 ## Pricing
 
-- **Free Trial** — 14 days, no credit card required
+- **Free Trial** — 30 days, no credit card required
 - **Personal** — $29/month or $299/year
 - **Team** — $25/seat/month
 
