@@ -11,6 +11,10 @@
   <a href="https://solonai.com/help/grantai">Documentation</a>
 </p>
 
+<p align="center">
+  <img src="assets/demo.gif" alt="GrantAi Demo" width="800">
+</p>
+
 ---
 
 ## The Problem
