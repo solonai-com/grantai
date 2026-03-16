@@ -2,6 +2,15 @@
 
 All notable changes to GrantAi will be documented in this file.
 
+## [1.8.6] - 2026-03-11
+
+### Fixed
+- Document chunking for files over 512 tokens — now uses windowed processing with overlap
+- Windows build stability improvements
+
+### Changed
+- Auto-trial activation on first run (no license key required for 30-day trial)
+
 ## [1.8.5] - 2026-02-27
 
 ### Fixed

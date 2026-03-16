@@ -182,6 +182,10 @@ GrantAi is built by [Lawrence Grant](https://linkedin.com/in/lawrencegrant), fou
 
 Background: Harvard, IBM, AI architecture and security work for Blackstone, Goldman Sachs, and Vanguard. Author of *AI in Financial Services*.
 
+## Why We Built This
+
+Read the full case for deterministic memory: **[Your AI Has Amnesia. You're Paying. Blame the Architecture.](https://solonai.com/grantai/essay)**
+
 ## Documentation
 
 - [Installation Guide](https://solonai.com/help/grantai)
