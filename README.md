@@ -1,32 +1,56 @@
 <h1 align="center">GrantAi</h1>
 
 <p align="center">
-  <strong>Infinite Memory for AI</strong><br>
+  <strong>Deterministic Memory for AI</strong><br>
   Local. Private. Secure.
 </p>
 
 <p align="center">
   <a href="https://solonai.com/grantai">Website</a> •
   <a href="https://solonai.com/grantai/download">Download</a> •
-  <a href="https://solonai.com/pricing">Pricing</a> •
   <a href="https://solonai.com/help/grantai">Documentation</a>
 </p>
 
 ---
 
-## What is GrantAi?
+## The Problem
 
-GrantAi is the **shared memory layer** for AI agents.
+Every AI system today has the same flaw: **it guesses instead of remembers.**
 
-Coordination frameworks are everywhere — CrewAI, AutoGen, LangGraph. But agents still lose everything when a session ends. Context windows reset. Knowledge evaporates. Each agent starts from zero.
+RAG (Retrieval-Augmented Generation) converts your documents into vectors — numerical approximations of meaning. When you query, it returns content that is *mathematically similar* to your question. Similar is not the same as correct.
 
-GrantAi solves this:
+Ask for "HIPAA encryption penalties" and RAG returns chunks that *look like* compliance content. Maybe the right section. Maybe adjacent paragraphs. Maybe hallucinated ranges. You pay for every token retrieved, whether relevant or not.
 
-- **Persistent Memory** — Knowledge survives sessions, accumulates over time
-- **Shared Across Agents** — Multiple AI tools read and write to the same brain
-- **12ms Recall** — Sub-second retrieval regardless of memory size
-- **100% Local** — Your data never leaves your machine
-- **AES-256 Encrypted** — Secure at rest, zero data egress
+This is the **Retrieval Tax**:
+- **Re-retrieval** — Same questions, same searches, same cost
+- **Over-retrieval** — 20 chunks when you need 3
+- **Labor** — Engineers tuning embeddings instead of building products
+- **Risk** — Approximate answers in domains that require precision
+
+Enterprise AI spends 85% of compute on inference. Most of that is wasted on retrieving content that doesn't answer the question.
+
+## The Solution
+
+GrantAi is **deterministic memory** for AI agents.
+
+Instead of similarity search, GrantAi uses direct addressing. Every piece of knowledge has a unique identifier. Retrieval is a lookup, not a search. You get the exact content you indexed — verbatim, with attribution, in milliseconds.
+
+| RAG | GrantAi |
+|-----|---------|
+| Returns *similar* content | Returns *the exact* content |
+| 10-20 chunks, hope one is right | 1-3 sentences, always right |
+| Slows down as corpus grows | O(1) regardless of size |
+| No attribution | Full audit trail |
+| Approximate | Deterministic |
+
+**Result:** 97% reduction in tokens sent to the LLM. Faster responses. Lower cost. No hallucination from retrieval.
+
+## Why It Matters
+
+- **Compliance** — Exact citations, not paraphrased guesses
+- **Multi-Agent** — Shared memory across your AI workforce with speaker attribution
+- **Cost** — Pay for answers, not for searching
+- **Security** — 100% local, AES-256 encrypted, zero data egress
 
 ## Quick Start
 
@@ -35,7 +59,7 @@ GrantAi solves this:
 ```bash
 # 1. Download from https://solonai.com/grantai/download
 # 2. Extract and install
-./install.sh YOUR_LICENSE_KEY
+./install.sh
 
 # 3. Restart your AI tool (Claude Code, Cursor, etc.)
 ```
@@ -43,7 +67,7 @@ GrantAi solves this:
 ### Docker (All Platforms)
 
 ```bash
-docker pull ghcr.io/solonai-com/grantai-memory:1.8.5
+docker pull ghcr.io/solonai-com/grantai-memory:1.8.6
 ```
 
 Add to your Claude Desktop config (`~/.config/Claude/claude_desktop_config.json`):
@@ -55,8 +79,7 @@ Add to your Claude Desktop config (`~/.config/Claude/claude_desktop_config.json`
       "command": "docker",
       "args": ["run", "-i", "--rm", "--pull", "always",
                "-v", "grantai-data:/data",
-               "-e", "GRANTAI_LICENSE_KEY=YOUR_KEY",
-               "ghcr.io/solonai-com/grantai-memory:1.8.5"]
+               "ghcr.io/solonai-com/grantai-memory:1.8.6"]
     }
   }
 }
@@ -68,7 +91,7 @@ Add to your Claude Desktop config (`~/.config/Claude/claude_desktop_config.json`
 |----------|--------|--------|
 | macOS (Apple Silicon) | Native | ✅ |
 | Linux (x64) | Native | ✅ |
-| Windows | Docker | ✅ |
+| Windows | Native | ✅ |
 | All Platforms | Docker | ✅ |
 
 ## MCP Tools
@@ -145,8 +168,7 @@ GrantAi works with any MCP-compatible client. Point your agents at the same Gran
       "command": "docker",
       "args": ["run", "-i", "--rm", "--pull", "always",
                "-v", "grantai-data:/data",
-               "-e", "GRANTAI_LICENSE_KEY=YOUR_KEY",
-               "ghcr.io/solonai-com/grantai-memory:1.8.5"]
+               "ghcr.io/solonai-com/grantai-memory:1.8.6"]
     }
   }
 }
@@ -154,18 +176,15 @@ GrantAi works with any MCP-compatible client. Point your agents at the same Gran
 
 All agents using this config share the same memory volume (`grantai-data`).
 
-## Pricing
+## Built By
 
-- **Free Trial** — 30 days, no credit card required
-- **Personal** — $29/month or $299/year
-- **Team** — $25/seat/month
+GrantAi is built by [Lawrence Grant](https://linkedin.com/in/lawrencegrant), founder of [SolonAI](https://solonai.com).
 
-[View full pricing →](https://solonai.com/pricing)
+Background: Harvard, IBM, AI architecture and security work for Blackstone, Goldman Sachs, and Vanguard. Author of *AI in Financial Services*.
 
 ## Documentation
 
 - [Installation Guide](https://solonai.com/help/grantai)
-- [FAQ](https://solonai.com/pricing#faq)
 - [Troubleshooting](https://solonai.com/help/grantai#troubleshooting)
 
 ## Support
