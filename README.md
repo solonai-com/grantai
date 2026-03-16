@@ -39,7 +39,7 @@ Instead of similarity search, GrantAi uses direct addressing. Every piece of kno
 |-----|---------|
 | Returns *similar* content | Returns *the exact* content |
 | 10-20 chunks, hope one is right | 1-3 sentences, always right |
-| Slows down as corpus grows | O(1) regardless of size |
+| Slows down as corpus grows | Milliseconds regardless of size |
 | No attribution | Full audit trail |
 | Approximate | Deterministic |
 
