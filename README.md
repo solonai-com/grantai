@@ -184,7 +184,7 @@ All agents using this config share the same memory volume (`grantai-data`).
 
 GrantAi is built by [Lawrence Grant](https://linkedin.com/in/lawrencegrant), founder of [SolonAI](https://solonai.com).
 
-Background: Harvard, IBM, AI architecture and security work for Blackstone, Goldman Sachs, and Vanguard. Author of *AI in Financial Services*.
+Background: Harvard, IBM, AI architecture and security work for Blackstone, Goldman Sachs, and Vanguard. Author of *Mergers and Acquisitions Cybersecurity: The Framework For Maximizing Value*.
 
 ## Why We Built This
 
@@ -202,7 +202,7 @@ Read the full case for deterministic memory: **[Your AI Has Amnesia. You're Payi
 
 ## License
 
-GrantAi is proprietary software. See [Terms of Service](https://solonai.com/grantai/terms).
+Free to try. [Pricing & Terms](https://solonai.com/grantai/pricing)
 
 ---
 
