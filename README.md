@@ -17,6 +17,22 @@
 
 ---
 
+## Free Edition — one command, no account
+
+The free edition is the full local memory engine as an MCP server: no email, no license key, no trial, and no network after the one-time model download (about 650 MB).
+
+```bash
+# macOS / Linux
+curl -fsSL "https://solonai.com/grantai/install.sh?src=github" | bash
+```
+
+```powershell
+# Windows 10/11 (PowerShell)
+irm "https://solonai.com/grantai/install.ps1?src=github" | iex
+```
+
+The installer verifies both downloads against a published SHA-256 manifest, installs under `~/.grantai/free` (Windows: `%LOCALAPPDATA%\GrantAi\free`), and registers the server with Claude Code, Claude Desktop, Cursor, Gemini CLI and Codex where they are installed. Any other MCP client takes the same command and arguments. Homebrew: `brew install solonai/grantai/grantai-free`. Air-gapped installs and the full list of what runs where are on the [developers page](https://solonai.com/developers).
+
 ## The Problem
 
 Every AI system today has the same flaw: **it guesses instead of remembers.**
